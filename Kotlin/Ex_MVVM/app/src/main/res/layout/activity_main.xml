@@ -6,7 +6,7 @@
 
     <data>
         <variable
-            name="viewmodel"
+            name="myViewModel"
             type="com.min.ex_mvvm.view_model.MyViewModel" />
     </data>
 
@@ -33,7 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="${viewmodel}"
+            android:hint="@string/hint_id"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:layout_editor_absoluteX="0dp" />
 
@@ -42,28 +42,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:hint="@string/hint_pw"
             app:layout_constraintTop_toBottomOf="@+id/id_edit_text"
             tools:layout_editor_absoluteX="0dp" />
+
+        <EditText
+            android:id="@+id/cal_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_cal"
+            android:text="@{myViewModel._result}"
+            app:layout_constraintTop_toBottomOf="@+id/pw_edit_text"
+            tools:layout_editor_absoluteX="-16dp" />
 
         <Button
             android:id="@+id/btn_plus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="더하기"
+            android:text="@string/plus"
+            android:onClick="@{() -> myViewModel.increase()}"
             app:layout_constraintEnd_toStartOf="@id/btn_minus"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pw_edit_text" />
+            app:layout_constraintTop_toBottomOf="@+id/cal_edit_text" />
 
         <Button
             android:id="@+id/btn_minus"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="빼기"
+            android:text="@string/minus"
+            android:onClick="@{() -> myViewModel.decrease()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/btn_plus"
-            app:layout_constraintTop_toBottomOf="@+id/pw_edit_text" />
+            app:layout_constraintTop_toBottomOf="@+id/cal_edit_text" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

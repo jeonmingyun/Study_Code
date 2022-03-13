@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Ex_MVVM</string>
+    <string name="hint_id">id</string>
+    <string name="hint_pw">pw</string>
+    <string name="hint_cal">계산기</string>
+    <string name="plus">더하기</string>
+    <string name="minus">빼기</string>
 </resources>

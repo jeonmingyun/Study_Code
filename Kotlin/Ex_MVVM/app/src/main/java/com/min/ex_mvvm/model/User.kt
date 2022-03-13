@@ -1,6 +1,6 @@
 package com.min.ex_mvvm.model
 
-class User {
-    var id: String = ""
-    var pw: String = ""
+
+data class User(val id: String, val pw: String)  {
+
 }
