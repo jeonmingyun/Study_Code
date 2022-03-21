@@ -27,18 +27,11 @@ class MainActivity : AppCompatActivity() {
         // 변수명, 람다식 파라미터명 모두 자동생성되기 때문에 viewModel의 변수 명과 맞춤
         val resultObserver = Observer<Int> { result ->
             // Update the UI
-            binding.calEditText.setText(result.toString())
+            binding.calResultTv.setText(result.toString())
         }
 
         // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
         model.result.observe(this, resultObserver)
-
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        model.user.observe(this,  Observer<User> { user ->
-            // Update the UI
-            binding.idEditText.setText(user.id)
-            binding.pwEditText.setText(user.pw)
-        })
     }
 
 
