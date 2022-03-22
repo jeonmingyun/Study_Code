@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Project_Map</string>
+    <string name="save">SAVE</string>
+    <string name="hint_nickname">nickname</string>
+    <string name="label_a">A</string>
+    <string name="label_b">B</string>
+    <string name="label_aqi">aqi :</string>
+    <string name="label_nickname">nickname :</string>
+    <string name="label_price">PRICE : </string>
+    <string name="show_history">SHOW HISTORY</string>
+</resources>

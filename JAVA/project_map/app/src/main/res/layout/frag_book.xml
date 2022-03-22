@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/base_spacer_15">
+
+    <TextView
+        android:id="@+id/tv_location_a_label"
+        style="@style/book_label"
+        android:text="@string/label_a"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_location_a_info"
+        style="@style/book_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_location_a_label"
+        app:layout_constraintTop_toTopOf="@id/tv_location_a_label" />
+
+    <TextView
+        android:id="@+id/tv_location_b_label"
+        style="@style/book_label"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_b"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_location_a_info" />
+
+    <TextView
+        android:id="@+id/tv_location_b_info"
+        style="@style/book_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_location_b_label"
+        app:layout_constraintTop_toTopOf="@id/tv_location_b_label" />
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/book_label"
+        android:layout_marginTop="10dp"
+        android:text="@string/label_price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_location_b_info" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:gravity="center|start"
+        android:textSize="26sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        tools:text="3000" />
+
+    <Button
+        android:id="@+id/btn_submit"
+        style="@style/bottom_btn"
+        android:text="@string/show_history"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
