@@ -1,17 +1,29 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--첫번째 화면-->
+<?xml version="1.0" encoding="utf-8"?><!--첫번째 화면-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
+
+    <fragment
         android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/cl_label_wrapper"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="25dp"
+        android:src="@drawable/location_on"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
+        app:layout_constraintEnd_toEndOf="@id/map"
+        app:layout_constraintStart_toStartOf="@+id/map"
+        app:layout_constraintTop_toTopOf="@+id/map" />
 
     <TextView
         android:id="@+id/tv_aqi"
@@ -32,30 +44,30 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <TextView
-            android:id="@+id/tv_a_label"
+            android:id="@+id/tv_a_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@id/tv_b_label"
+            app:layout_constraintBottom_toTopOf="@id/tv_b_address"
             app:layout_constraintEnd_toStartOf="@+id/btn_v"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
-            android:id="@+id/tv_b_label"
+            android:id="@+id/tv_b_address"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             app:layout_constraintEnd_toStartOf="@+id/btn_v"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_a_label" />
+            app:layout_constraintTop_toBottomOf="@id/tv_a_address" />
 
         <Button
             android:id="@+id/btn_v"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toBottomOf="@id/tv_b_label"
+            app:layout_constraintBottom_toBottomOf="@id/tv_b_address"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/tv_a_label"
-            tools:text="v btn" />
+            app:layout_constraintTop_toTopOf="@+id/tv_a_address"
+            android:text="@string/btn_v_text_a"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

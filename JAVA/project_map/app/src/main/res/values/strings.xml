@@ -8,4 +8,8 @@
     <string name="label_nickname">nickname :</string>
     <string name="label_price">PRICE : </string>
     <string name="show_history">SHOW HISTORY</string>
+
+    <string name="btn_v_text_a">Set A</string>
+    <string name="btn_v_text_b">Set B</string>
+    <string name="btn_v_text_book">Book</string>
 </resources>

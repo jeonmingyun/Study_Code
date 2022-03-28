@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 }
 
 android {
@@ -29,7 +30,17 @@ android {
 }
 
 dependencies {
+    //google map
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
+    // hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+
+    //retrofit2
+    implementation group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.9.0'
+    implementation group: 'com.squareup.retrofit2', name: 'converter-gson', version: '2.9.0'
+
+    //default
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
