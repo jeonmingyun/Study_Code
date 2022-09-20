@@ -83,3 +83,7 @@ lint/generated/
 lint/outputs/
 lint/tmp/
 # lint/reports/
+Kotlin/Alarm/.idea/.gitignore
+Kotlin/Alarm/.idea/compiler.xml
+Kotlin/Alarm/.idea/gradle.xml
+Kotlin/Alarm/.idea/misc.xml
