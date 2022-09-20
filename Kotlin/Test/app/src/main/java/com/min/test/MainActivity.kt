@@ -23,6 +23,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         binding.btnMain.setOnClickListener {
             startActivity(Intent(this, SecondActivity::class.java))
         }
+        binding.testText.customSelectionActionModeCallback = MyCallback(this, binding.testText)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -44,17 +45,60 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         val id: Int = item.getItemId()
         val title: String = item.getTitle().toString()
 
-        if(id == R.id.favorite){
+        if (id == R.id.favorite) {
             showToast(title + ": favorite 정보를 확인합니다.")
-        }
-        else if(id == R.id.search){
+        } else if (id == R.id.search) {
             showToast(title + ": search 정보를 확인합니다.")
-        }
-        else if(id == R.id.more){
+        } else if (id == R.id.more) {
             showToast(title + ": more 정보를 확인합니다.")
         }
 
         return true
     }
 
+//    inner class MyCallback(tv: TextView) : ActionMode.Callback {
+//        var mTextView: TextView = tv
+//
+//        override fun onCreateActionMode(mode: ActionMode?, menu: Menu?): Boolean {;
+//            // 선택 옵션 새로 만듬
+//            mode!!.menuInflater.inflate(R.menu.highlight_menu, menu);
+//
+//            return true;
+//        }
+//
+//        override fun onPrepareActionMode(mode: ActionMode?, menu: Menu?): Boolean {
+//            // 기존 선택 옵션 제거
+//            menu!!
+//            menu.removeItem(android.R.id.selectAll);
+//            menu.removeItem(android.R.id.cut);
+//            menu.removeItem(android.R.id.copy);
+//            menu.removeItem(android.R.id.shareText);
+//
+//            return true;
+//        }
+//
+//        override fun onActionItemClicked(mode: ActionMode?, item: MenuItem?): Boolean {
+//            val start = mTextView.selectionStart
+//            val end = mTextView.selectionEnd
+//            val wordToSpan: Spannable = mTextView.text as Spannable
+//
+//            when (item!!.itemId) {
+//                R.id.highlight -> {
+//                    wordToSpan.setSpan(
+//                        BackgroundColorSpan(resources.getColor(R.color.purple_500)),
+//                        start,
+//                        end,
+//                        Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
+//                    )
+//                    mTextView.text = wordToSpan
+//                    return true;
+//                }
+//            }
+//            return false;
+//        }
+//
+//        override fun onDestroyActionMode(mode: ActionMode?) {
+//
+//        }
+//    }
 }

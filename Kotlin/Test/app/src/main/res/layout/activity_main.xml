@@ -35,6 +35,15 @@
                     android:layout_height="wrap_content"
                     android:background="#f2f2f2"
                     tools:text="main" />
+
+                <TextView
+                    android:id="@+id/testText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:layout_below="@id/btnMain"
+                    android:text="blah blah blah blah blah "
+                    android:textIsSelectable="true" />
             </RelativeLayout>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

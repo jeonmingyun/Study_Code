@@ -3,7 +3,6 @@ package com.min.test
 import android.content.Context
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
 import com.google.android.material.appbar.MaterialToolbar
 
 open class BaseActivity : AppCompatActivity() {
