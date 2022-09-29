@@ -9,9 +9,11 @@ import android.media.MediaPlayer
 import android.media.RingtoneManager
 import android.net.Uri
 import android.os.Build
+import android.os.PowerManager
 import android.os.Vibrator
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.legacy.content.WakefulBroadcastReceiver
 import java.util.*
 
 class AlarmReceiver : BroadcastReceiver() {
