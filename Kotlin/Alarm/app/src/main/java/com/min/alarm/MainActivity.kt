@@ -29,36 +29,12 @@ class MainActivity : AppCompatActivity() {
         timePicker = findViewById(R.id.time_picker)
         save = findViewById(R.id.save)
 
-        var alarmMgr: AlarmManager? = null
-        lateinit var alarmIntent: PendingIntent
-        alarmMgr = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        alarmIntent = Intent(this, AlarmReceiver::class.java).let { intent ->
-            PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_MUTABLE)
-        }
-        val calendar = Calendar.getInstance()
-        calendar.timeInMillis = System.currentTimeMillis()
-        val hour = timePicker!!.hour
-        val minute = 0
-        calendar[Calendar.HOUR_OF_DAY] = hour
-        calendar[Calendar.MINUTE] = minute
-        if (calendar.before(Calendar.getInstance())) {
-            calendar.add(Calendar.DATE, 1)
+        val alarmMgr = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val alarmIntent = Intent(this, AlarmReceiver::class.java).let { intent ->
+            PendingIntent.getBroadcast(this, AlarmReceiver.NOTIFICATION_ID, intent, PendingIntent.FLAG_IMMUTABLE)
         }
 
-        Log.e("ddddddd", calendar.time.dateToString("yyyy-MM-dd HH:mm:ss"))
-        alarmMgr.setRepeating(
-            AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            calendar.timeInMillis,
-            AlarmManager.INTERVAL_DAY,
-            alarmIntent
-        )
-        // 테스트 알람
-/*        alarmMgr?.set(
-            AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            SystemClock.elapsedRealtime() +5000,
-            alarmIntent
-        )*/
-
+        // spinner 저장 시간 알람
         save!!.setOnClickListener(View.OnClickListener { v: View? ->
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return@OnClickListener
 
@@ -67,25 +43,41 @@ class MainActivity : AppCompatActivity() {
             val hour = timePicker!!.hour
             val minute = timePicker!!.minute
             calendar[Calendar.HOUR_OF_DAY] = hour
-            calendar[Calendar.MINUTE] = minute
-            if (calendar.before(Calendar.getInstance())) {
-                calendar.add(Calendar.DATE, 1)
-            }
+            calendar[Calendar.MINUTE] = minute+1
+//            if (calendar.before(Calendar.getInstance())) {
+//                calendar.add(Calendar.DATE, 1)
+//            }
 
             Log.e("ddddddd", calendar.time.dateToString("yyyy-MM-dd HH:mm:ss"))
-            val alarmManager = this.getSystemService(ALARM_SERVICE) as AlarmManager
-            if (alarmManager != null) {
-                val intent = Intent(this, AlarmReceiver::class.java)
-                val alarmIntent =
-                    PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_IMMUTABLE)
-                alarmManager.setRepeating(
-                    AlarmManager.RTC_WAKEUP, calendar.timeInMillis,
-                    AlarmManager.INTERVAL_DAY, alarmIntent
-                )
-                Toast.makeText(this@MainActivity, "알람이 저장되었습니다.", Toast.LENGTH_LONG).show()
-//                alarmManager.cancel(alarmIntent)
-            }
+            // 3초 뒤 알람 : 단일 재생
+            /*alarmMgr?.set(
+                AlarmManager.RTC_WAKEUP,
+                SystemClock.elapsedRealtime() +3000,
+                alarmIntent
+            )*/
+
+            // 지정 시간 알람
+            alarmMgr.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.timeInMillis,
+                AlarmManager.INTERVAL_DAY,
+                alarmIntent
+            )
+
+            // 3초 뒤 알람 : 반복 재생
+/*
+            alarmMgr?.setInexactRepeating(
+                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + 3000L,
+                AlarmManager.INTERVAL_DAY,
+                alarmIntent
+            )
+*/
+
+            Toast.makeText(this@MainActivity, "알람이 저장되었습니다.", Toast.LENGTH_LONG).show()
+//                alarmMgr.cancel(alarmIntent)
         })
+
     }
 
     private fun Date.dateToString(format: String): String {

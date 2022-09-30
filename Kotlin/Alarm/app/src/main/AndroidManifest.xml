@@ -3,7 +3,12 @@
     package="com.min.alarm">
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!--
+    기기가 종료되면 모든 알람이 취소됨
+    이 상황을 방지하기 위해 재부팅시 알람을 다시 시작하도록함-->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -25,11 +30,14 @@
         <!--알람 수신기-->
         <receiver
             android:name=".AlarmReceiver"
-            android:enabled="true"
-            android:exported="true">
+            android:exported="false">
+            <!--
+            enabled = false : 앱이 리시버를 명시적으로 사용하지 않으면 수신기는 호출되지 않
+            exported = false : 다른 앱으로부터 인텐트를 수신하지 않음
+            -->
             <intent-filter>
                 <!--부팅시 자동 실행-->
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
     </application>

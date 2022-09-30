@@ -19,11 +19,11 @@ import java.util.*
 class AlarmReceiver : BroadcastReceiver() {
     companion object {
         const val ALARM_MILLISECONDS = 1000
-        private var notificationManager: NotificationManager? = null
         const val NOTIFICATION_CHANNEL_ID = "ALARM"
         const val NOTIFICATION_ID = 100
     }
 
+    private var notificationManager: NotificationManager? = null
     lateinit var context: Context
 
     override fun onReceive(context: Context, intent: Intent) {
