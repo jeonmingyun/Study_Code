@@ -2,6 +2,7 @@ package com.min.ex_alarm
 
 import android.content.Context
 import android.database.Cursor
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +18,7 @@ class AlarmCursorAdapter(context: Context?, c: Cursor?) :
     private var mRepeatInfoText: TextView? = null
     private var mActiveImage: ImageView? = null
     private var mThumbnailImage: ImageView? = null
-    private val mColorGenerator: ColorGenerator = ColorGenerator.DEFAULT
-    private var mDrawableBuilder: TextDrawable? = null
+//    private var mDrawableBuilder: TextDrawable? = null
     override fun newView(context: Context, cursor: Cursor, parent: ViewGroup): View {
         return LayoutInflater.from(context).inflate(R.layout.alarm_items, parent, false)
     }
@@ -64,12 +64,11 @@ class AlarmCursorAdapter(context: Context?, c: Cursor?) :
         if (title != null && !title.isEmpty()) {
             letter = title.substring(0, 1)
         }
-        val color: Int = mColorGenerator.getRandomColor()
 
         // Create a circular icon consisting of  a random background colour and first letter of title
-        mDrawableBuilder = TextDrawable.builder()
-            .buildRound(letter, color)
-        mThumbnailImage!!.setImageDrawable(mDrawableBuilder)
+//        mDrawableBuilder = TextDrawable.builder()
+//            .buildRound(letter, Color.RED)
+//        mThumbnailImage!!.setImageDrawable(mDrawableBuilder)
     }
 
     // Set date and time views

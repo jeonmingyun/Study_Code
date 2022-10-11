@@ -1,7 +1,6 @@
 package com.min.ex_alarm
 
 import android.app.LoaderManager
-import android.app.ProgressDialog
 import android.content.ContentUris
 import android.content.CursorLoader
 import android.content.Intent
@@ -24,13 +23,12 @@ class MainActivity : AppCompatActivity(),
     var mCursorAdapter: AlarmCursorAdapter? = null
     var alarmReminderDbHelper: AlarmReminderDbHelper = AlarmReminderDbHelper(this)
     var reminderListView: ListView? = null
-    var prgDialog: ProgressDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         mToolbar = findViewById(R.id.toolbar) as Toolbar?
         setSupportActionBar(mToolbar)
-        mToolbar.setTitle(R.string.app_name)
+        mToolbar!!.setTitle(R.string.app_name)
         reminderListView = findViewById(R.id.list) as ListView
         val emptyView: View = findViewById(R.id.empty_view)
         reminderListView!!.emptyView = emptyView
@@ -49,7 +47,7 @@ class MainActivity : AppCompatActivity(),
                 startActivity(intent)
             }
         mAddReminderButton = findViewById(R.id.fab) as FloatingActionButton?
-        mAddReminderButton.setOnClickListener(View.OnClickListener { v ->
+        mAddReminderButton!!.setOnClickListener(View.OnClickListener { v ->
             val intent = Intent(v.context, AddReminderActivity::class.java)
             startActivity(intent)
         })
@@ -78,11 +76,11 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onLoadFinished(loader: Loader<Cursor>, cursor: Cursor) {
-        mCursorAdapter.swapCursor(cursor)
+        mCursorAdapter!!.swapCursor(cursor)
     }
 
     override fun onLoaderReset(loader: Loader<Cursor>) {
-        mCursorAdapter.swapCursor(null)
+        mCursorAdapter!!.swapCursor(null)
     }
 
     companion object {

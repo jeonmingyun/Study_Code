@@ -1,9 +1,6 @@
 package com.min.ex_alarm.reminder
 
-import android.app.IntentService
-import android.app.Notification
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.database.Cursor
@@ -33,7 +30,7 @@ class ReminderAlarmService : IntentService(TAG) {
         try {
             if (cursor != null && cursor!!.moveToFirst()) {
                 description = AlarmReminderContract.getColumnString(
-                    cursor,
+                    cursor!!,
                     AlarmReminderContract.AlarmReminderEntry.KEY_TITLE
                 )
             }
@@ -42,7 +39,7 @@ class ReminderAlarmService : IntentService(TAG) {
                 cursor!!.close()
             }
         }
-        val note: Notification = Builder(this)
+        val note: Notification = Notification.Builder(this)
             .setContentTitle(getString(R.string.reminder_title))
             .setContentText(description)
             .setSmallIcon(R.drawable.ic_add_alert_black_24dp)

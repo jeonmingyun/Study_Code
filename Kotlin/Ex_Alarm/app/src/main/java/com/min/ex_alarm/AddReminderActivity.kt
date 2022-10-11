@@ -15,10 +15,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.View.OnTouchListener
-import android.widget.EditText
-import android.widget.Switch
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.app.NavUtils
@@ -147,16 +144,16 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
 
         // Setup up active buttons
         if (mActive == "false") {
-            mFAB1.setVisibility(View.VISIBLE)
-            mFAB2.setVisibility(View.GONE)
+            mFAB1!!.setVisibility(View.VISIBLE)
+            mFAB2!!.setVisibility(View.GONE)
         } else if (mActive == "true") {
-            mFAB1.setVisibility(View.GONE)
-            mFAB2.setVisibility(View.VISIBLE)
+            mFAB1!!.setVisibility(View.GONE)
+            mFAB2!!.setVisibility(View.VISIBLE)
         }
         setSupportActionBar(mToolbar)
-        getSupportActionBar().setTitle(R.string.title_activity_add_reminder)
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true)
-        getSupportActionBar().setHomeButtonEnabled(true)
+        getSupportActionBar()!!.setTitle(R.string.title_activity_add_reminder)
+        getSupportActionBar()!!.setDisplayHomeAsUpEnabled(true)
+        getSupportActionBar()!!.setHomeButtonEnabled(true)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -203,7 +200,7 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
     }
 
     // Obtain time from time picker
-    fun onTimeSet(view: RadialPickerLayout?, hourOfDay: Int, minute: Int) {
+    override fun onTimeSet(view: TimePicker?, hourOfDay: Int, minute: Int) {
         mHour = hourOfDay
         mMinute = minute
         mTime = if (minute < 10) {
@@ -215,7 +212,7 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
     }
 
     // Obtain date from date picker
-    fun onDateSet(view: DatePickerDialog?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+    override fun onDateSet(view: DatePicker?, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         var monthOfYear = monthOfYear
         monthOfYear++
         mDay = dayOfMonth
@@ -228,18 +225,18 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
     // On clicking the active button
     fun selectFab1(v: View?) {
         mFAB1 = findViewById(R.id.starred1) as FloatingActionButton?
-        mFAB1.setVisibility(View.GONE)
+        mFAB1!!.setVisibility(View.GONE)
         mFAB2 = findViewById(R.id.starred2) as FloatingActionButton?
-        mFAB2.setVisibility(View.VISIBLE)
+        mFAB2!!.setVisibility(View.VISIBLE)
         mActive = "true"
     }
 
     // On clicking the inactive button
     fun selectFab2(v: View?) {
         mFAB2 = findViewById(R.id.starred2) as FloatingActionButton?
-        mFAB2.setVisibility(View.GONE)
+        mFAB2!!.setVisibility(View.GONE)
         mFAB1 = findViewById(R.id.starred1) as FloatingActionButton?
-        mFAB1.setVisibility(View.VISIBLE)
+        mFAB1!!.setVisibility(View.VISIBLE)
         mActive = "false"
     }
 
@@ -306,7 +303,7 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
         alert.show()
     }
 
-    fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // Inflate the menu options from the res/menu/menu_editor.xml file.
         // This adds menu items to the app bar.
         getMenuInflater().inflate(R.menu.menu_add_reminder, menu)
@@ -317,7 +314,7 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
      * This method is called after invalidateOptionsMenu(), so that the
      * menu can be updated (some menu items can be hidden or made visible).
      */
-    fun onPrepareOptionsMenu(menu: Menu): Boolean {
+    override fun onPrepareOptionsMenu(menu: Menu): Boolean {
         super.onPrepareOptionsMenu(menu)
         // If this is a new reminder, hide the "Delete" menu item.
         if (mCurrentReminderUri == null) {
@@ -327,7 +324,7 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
         return true
     }
 
-    fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         // User clicked on a menu option in the app bar overflow menu
         when (item.itemId) {
@@ -417,7 +414,7 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
             // Call the ContentResolver to delete the reminder at the given content URI.
             // Pass in null for the selection and selection args because the mCurrentreminderUri
             // content URI already identifies the reminder that we want.
-            val rowsDeleted: Int = getContentResolver().delete(mCurrentReminderUri, null, null)
+            val rowsDeleted: Int = getContentResolver().delete(mCurrentReminderUri!!, null, null)
 
             // Show a toast message depending on whether or not the delete was successful.
             if (rowsDeleted == 0) {
@@ -485,7 +482,7 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
             val newUri: Uri = getContentResolver().insert(
                 AlarmReminderContract.AlarmReminderEntry.CONTENT_URI,
                 values
-            )
+            )!!
 
             // Show a toast message depending on whether or not the insertion was successful.
             if (newUri == null) {
@@ -503,7 +500,7 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
             }
         } else {
             val rowsAffected: Int =
-                getContentResolver().update(mCurrentReminderUri, values, null, null)
+                getContentResolver().update(mCurrentReminderUri!!, values, null, null)
 
             // Show a toast message depending on whether or not the update was successful.
             if (rowsAffected == 0) {
@@ -551,7 +548,7 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
     }
 
     // On pressing the back button
-    fun onBackPressed() {
+    override fun onBackPressed() {
         super.onBackPressed()
     }
 
@@ -650,4 +647,5 @@ class AddReminderActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListe
         private const val milWeek = 604800000L
         private const val milMonth = 2592000000L
     }
+
 }
