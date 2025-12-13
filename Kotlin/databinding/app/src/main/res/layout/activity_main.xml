@@ -17,25 +17,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/name_et"
+        <TextView
+            android:id="@+id/answer_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="name"
-            android:text="@{viewmodel.name, default=my_default}"
+            android:text="@{`결과 : ` + viewmodel.answer}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/age_et"
+        <!-- Button Container -->
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="age"
-            app:layout_constraintStart_toStartOf="@id/name_et"
-            app:layout_constraintTop_toBottomOf="@id/name_et" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/answer_tv">
 
+            <Button
+                android:id="@+id/plus_btn"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="+1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/minus_btn"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:text="-1"
+                app:layout_constraintStart_toEndOf="@id/plus_btn"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/clean_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="초기화"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/plus_btn" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
 

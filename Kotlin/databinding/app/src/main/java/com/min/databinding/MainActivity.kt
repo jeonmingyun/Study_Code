@@ -1,33 +1,46 @@
 package com.min.databinding
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.databinding.DataBindingUtil
+import com.min.databinding.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        // view 할당  - 기존 : setContentView(R.layout.activity_main)
+        // fragemnt, customView에서는 inflate를 사용해서 binding 함
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        // view 할당 방법2
+//        binding = ActivityMainBinding.inflate(layoutInflater)
+//        setContentView(binding.root)
+
+        // ViewModel 할당
+        binding.viewmodel = viewModel
+        // 옵저버 생성
+        viewModel.answer.observe(this) { answer ->
+            binding.answerTv.text = answer.toString()
         }
 
-        val binding: ActivityMainBinding = DataBindingUtil.setContentView(
-            this, R.layout.activity_main)
+        // 클릭 리스너 생성
+        setUpClickListeners()
+    }
 
-        binding.mainViewModel = MainViewModel()
-
-
-//        val binding = ActivityMainBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-//        binding.viewmodel = viewModel
-//        binding.lifecycleOwner = this
+    // 클릭 리스너 모음
+    private fun setUpClickListeners() {
+        binding.plusBtn.setOnClickListener {
+            viewModel.plus()
+        }
+        binding.minusBtn.setOnClickListener {
+            viewModel.minus()
+        }
+        binding.cleanBtn.setOnClickListener {
+            viewModel.clean()
+        }
     }
 }

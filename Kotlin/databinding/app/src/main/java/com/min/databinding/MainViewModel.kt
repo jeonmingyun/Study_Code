@@ -4,11 +4,24 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class MainViewModel : ViewModel() {
+class MainViewModel() : ViewModel() {
 
-    private val _name = MutableLiveData<String>("")
-    val name: LiveData<String> = _name
+    private val _answer = MutableLiveData<Int>(0)
+    val answer: LiveData<Int> = _answer
 
-    private val _age = MutableLiveData<Int>(0)
-    val age: LiveData<Int> = _age
+
+    fun plus() {
+        val currentValue = _answer.value ?: 0
+        _answer.value = currentValue + 1
+    }
+
+    fun minus() {
+        val currentValue = _answer.value ?: 0
+        _answer.value = currentValue - 1
+    }
+
+    fun clean() {
+        _answer.value = 0
+    }
+
 }
