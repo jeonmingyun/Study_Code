@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+    tools:context=".ui.main.MainActivity">
 
     <data>
         <!--View Model 연결-->
         <variable
-            name="viewmodel"
-            type="com.min.databinding.MainViewModel" />
+            name="viewModel"
+            type="com.min.databinding.ui.main.MainViewModel" />
     </data>
 
     <!-- UI layout's root element -->
@@ -17,15 +17,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!-- 데이터 옵저빙 방법1 : lifecycleOwner를 사용해 ViewModel의 LiveData 옵저빙 -->
         <TextView
-            android:id="@+id/answer_tv"
+            android:id="@+id/answer_tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{`결과 : ` + viewmodel.answer}"
+            android:text="@{`텍스트 옵저빙 방식1 : ` + viewModel.answer}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- 데이터 옵저빙 방법2 : activity에 옵저버를 직접 선언하여 LiveData 옵저빙 -->
+        <TextView
+            android:id="@+id/answer_tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/answer_tv1" />
 
         <!-- Button Container -->
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -33,12 +43,13 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/answer_tv">
+            app:layout_constraintTop_toBottomOf="@id/answer_tv2">
 
             <Button
                 android:id="@+id/plus_btn"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
+                android:onClick="@{() -> viewModel.plus()}"
                 android:text="+1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -47,6 +58,7 @@
                 android:id="@+id/minus_btn"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
+                android:onClick="@{() -> viewModel.minus()}"
                 android:text="-1"
                 app:layout_constraintStart_toEndOf="@id/plus_btn"
                 app:layout_constraintTop_toTopOf="parent" />
