@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.min.livedataduplicate.singleliveevent.ui.main.MainViewModel" />
+            type="com.min.livedataduplicate.singleliveevent.ui.next.NextViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -19,19 +19,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="@{() -> viewmodel.onDetailButtonClick()}"
-            android:text="SingleLiveEvent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Second View"
-            android:onClick="@{() -> viewmodel.onEventWrapperClick()}"
+            android:onClick="@{() -> viewmodel.onBackClick()}"
+            android:text="뒤로가기"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
