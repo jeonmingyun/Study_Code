@@ -1,12 +1,13 @@
 package com.min.livedataduplicate.singleliveevent.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.min.livedataduplicate.R
-import com.min.livedataduplicate.singleliveevent.ui.next.NextActivity
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,31 +15,26 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-
-        // 이벤트 관찰
-        viewModel.navigateToDetailEvent.observe(this) {
-            goToDetail()
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            insets
         }
 
-        findViewById<Button>(R.id.detailBtn).setOnClickListener {
-            viewModel.onDetailButtonClick()
-        }
-    }
-
-    private fun goToDetail() {
-        startActivity(Intent(this, DetailActivity::class.java))
+        setObservers()
     }
 
     // EventWrapper
-    private fun setEventWrapperObserver() {
-        viewModel.event.observe(this) { event ->
+    private fun setObservers() {
+        viewModel.event_ld.observe(this) { event_ld ->
+            Toast.makeText(this, event_ld, Toast.LENGTH_SHORT).show()
+        }
+        viewModel.event_ew.observe(this) { event_ew ->
             // 이벤트의 내용을 가져오되, 아직 처리되지 않은 경우에만 실행
-            event.getContentIfNotHandled()?.let { isClicked ->
-                // isClicked는 Boolean 값 (true)
-                if(isClicked) {
-                    Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show()
-                }
+            event_ew.getContentIfNotHandled()?.let { event_ew ->
+                Toast.makeText(this, event_ew, Toast.LENGTH_SHORT).show()
             }
         }
     }

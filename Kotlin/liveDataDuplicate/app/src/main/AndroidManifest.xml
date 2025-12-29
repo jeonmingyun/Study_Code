@@ -21,11 +21,6 @@
             </intent-filter>
         </activity>
 
-
-        <activity
-            android:name=".singleliveevent.ui.next.NextActivity"
-            android:exported="true">
-        </activity>
     </application>
 
 </manifest>
