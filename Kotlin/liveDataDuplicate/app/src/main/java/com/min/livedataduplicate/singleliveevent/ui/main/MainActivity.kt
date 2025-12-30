@@ -2,13 +2,13 @@ package com.min.livedataduplicate.singleliveevent.ui.main
 
 import android.os.Bundle
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.min.livedataduplicate.R
-import androidx.activity.enableEdgeToEdge
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import com.min.livedataduplicate.R
 import com.min.livedataduplicate.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         initialize()
         setObservers()
     }
+
     /**
      * 기본 초기화 세팅
      */
@@ -44,13 +45,19 @@ class MainActivity : AppCompatActivity() {
     // EventWrapper
     private fun setObservers() {
         viewModel.event_ld.observe(this) { event_ld ->
+            binding.answerTv.text = uiLog(event_ld, binding.answerTv.text.toString())
             Toast.makeText(this, event_ld, Toast.LENGTH_SHORT).show()
         }
         viewModel.event_ew.observe(this) { event_ew ->
+            binding.answerTv.text = uiLog(event_ew.peekContent(), binding.answerTv.text.toString())
             // 이벤트의 내용을 가져오되, 아직 처리되지 않은 경우에만 실행
             event_ew.getContentIfNotHandled()?.let { event_ew ->
                 Toast.makeText(this, event_ew, Toast.LENGTH_SHORT).show()
             }
         }
+    }
+
+    private fun uiLog(newText: String, lastText: String): String {
+        return "[${System.currentTimeMillis()}] ${newText} \n ${lastText}"
     }
 }

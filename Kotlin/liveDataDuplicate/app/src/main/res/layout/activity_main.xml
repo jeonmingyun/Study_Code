@@ -30,5 +30,12 @@
             android:onClick="@{() -> viewmodel.onEventWrapperClick()}"
             android:text="Event Wrapper" />
 
+        <TextView
+            android:id="@+id/answer_tv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#d2d2d2"
+            android:textColor="@color/black" />
+
     </LinearLayout>
 </layout>
