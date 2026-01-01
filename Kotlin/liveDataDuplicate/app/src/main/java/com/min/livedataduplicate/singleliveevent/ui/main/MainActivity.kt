@@ -8,8 +8,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.min.livedataduplicate.R
 import com.min.livedataduplicate.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,7 +32,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         initialize()
-        setObservers()
+        setLiveDataObserver()
+        setEventWrapperObserver()
+        setStateFlowObserver()
+        setSharedFlowObserver()
     }
 
     /**
@@ -41,18 +48,50 @@ class MainActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
     }
 
-
-    // EventWrapper
-    private fun setObservers() {
+    // LiveData 옵저버
+    private fun setLiveDataObserver() {
         viewModel.event_ld.observe(this) { event_ld ->
             binding.answerTv.text = uiLog(event_ld, binding.answerTv.text.toString())
             Toast.makeText(this, event_ld, Toast.LENGTH_SHORT).show()
         }
+    }
+
+    // EventWrapper 옵저버
+    private fun setEventWrapperObserver() {
         viewModel.event_ew.observe(this) { event_ew ->
             binding.answerTv.text = uiLog(event_ew.peekContent(), binding.answerTv.text.toString())
             // 이벤트의 내용을 가져오되, 아직 처리되지 않은 경우에만 실행
             event_ew.getContentIfNotHandled()?.let { event_ew ->
                 Toast.makeText(this, event_ew, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    // StateFlow 옵저버
+    private fun setStateFlowObserver() {
+        lifecycleScope.launch {
+            // repeatOnLifecycle launches the block in a new coroutine every time the
+            // lifecycle is in the STARTED state (or above) and cancels it when it's STOPPED.
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                // Trigger the flow and start listening for values.
+                // Note that this happens when lifecycle is STARTED and stops
+                // collecting when the lifecycle is STOPPED
+                viewModel.event_state_flow.collect { event_state_flow ->
+                    binding.answerTv.text = uiLog(event_state_flow, binding.answerTv.text.toString())
+                    Toast.makeText(this@MainActivity, event_state_flow, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    // SharedFlow 옵저버
+    private fun setSharedFlowObserver() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.event_shared_flow.collect { event_shared_flow ->
+                    binding.answerTv.text = uiLog(event_shared_flow, binding.answerTv.text.toString())
+                    Toast.makeText(this@MainActivity, event_shared_flow, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

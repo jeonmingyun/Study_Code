@@ -30,6 +30,20 @@
             android:onClick="@{() -> viewmodel.onEventWrapperClick()}"
             android:text="Event Wrapper" />
 
+        <Button
+            android:id="@+id/stateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewmodel.onStateFlowClick()}"
+            android:text="State Flow" />
+
+        <Button
+            android:id="@+id/sharedBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewmodel.onSharedFlowClick()}"
+            android:text="Shared Flow" />
+
         <TextView
             android:id="@+id/answer_tv"
             android:layout_width="match_parent"
