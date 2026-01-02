@@ -1,4 +1,4 @@
-package com.min.livedataduplicate.singleliveevent.common
+package com.min.livedataduplicate.common
 
 /**
  * Event Wrapper

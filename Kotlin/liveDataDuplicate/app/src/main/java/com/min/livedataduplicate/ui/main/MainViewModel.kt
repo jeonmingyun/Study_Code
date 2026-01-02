@@ -1,10 +1,10 @@
-package com.min.livedataduplicate.singleliveevent.ui.main
+package com.min.livedataduplicate.ui.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.min.livedataduplicate.singleliveevent.common.Event
+import com.min.livedataduplicate.common.Event
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow

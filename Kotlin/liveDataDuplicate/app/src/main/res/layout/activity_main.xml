@@ -6,7 +6,7 @@
 
         <variable
             name="viewmodel"
-            type="com.min.livedataduplicate.singleliveevent.ui.main.MainViewModel" />
+            type="com.min.livedataduplicate.ui.main.MainViewModel" />
     </data>
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".singleliveevent.ui.main.MainActivity">
+        tools:context=".ui.main.MainActivity">
 
         <Button
             android:id="@+id/ldBtn"

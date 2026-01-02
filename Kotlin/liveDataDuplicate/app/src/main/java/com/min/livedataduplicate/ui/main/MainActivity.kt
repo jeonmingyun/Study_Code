@@ -1,4 +1,4 @@
-package com.min.livedataduplicate.singleliveevent.ui.main
+package com.min.livedataduplicate.ui.main
 
 import android.os.Bundle
 import android.widget.Toast
@@ -70,12 +70,9 @@ class MainActivity : AppCompatActivity() {
     // StateFlow 옵저버
     private fun setStateFlowObserver() {
         lifecycleScope.launch {
-            // repeatOnLifecycle launches the block in a new coroutine every time the
-            // lifecycle is in the STARTED state (or above) and cancels it when it's STOPPED.
+            // repeatOnLifecycle은 라이프사이클 값을 매개변수로 받는 suspend 함수입니다.
+            // STARTED 상태(또는 그 이상)일 때마다 새 코루틴에서 블록을 실행하고, STOPPED 상태가 되면 취소하여 메모리 누수를 막습니다.
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                // Trigger the flow and start listening for values.
-                // Note that this happens when lifecycle is STARTED and stops
-                // collecting when the lifecycle is STOPPED
                 viewModel.event_state_flow.collect { event_state_flow ->
                     binding.answerTv.text = uiLog(event_state_flow, binding.answerTv.text.toString())
                     Toast.makeText(this@MainActivity, event_state_flow, Toast.LENGTH_SHORT).show()
